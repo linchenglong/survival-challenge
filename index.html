@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>生存挑战</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="game-container">
+
+        <!-- ================================================
+             开始界面
+             ================================================ -->
+        <div id="start-screen" class="screen">
+            <!-- Logo 区域 -->
+            <div class="logo-wrap">
+                <span class="logo-icon">🧟</span>
+                <h1>生存挑战</h1>
+                <p class="subtitle">SURVIVAL CHALLENGE</p>
+            </div>
+
+            <!-- 分隔线 -->
+            <div class="divider"></div>
+
+            <!-- 游戏说明卡片 -->
+            <div class="info-cards">
+                <div class="info-card">
+                    <span class="card-icon">🎯</span>
+                    <span class="card-title">目标</span>
+                    <span class="card-value">消灭丧尸</span>
+                </div>
+                <div class="info-card">
+                    <span class="card-icon">🔫</span>
+                    <span class="card-title">武器</span>
+                    <span class="card-value">5 种枪械</span>
+                </div>
+                <div class="info-card">
+                    <span class="card-icon">💊</span>
+                    <span class="card-title">道具</span>
+                    <span class="card-value">随机掉落</span>
+                </div>
+            </div>
+
+            <button id="start-btn" class="btn">开始游戏</button>
+            <p style="font-size:0.7rem;color:rgba(255,255,255,0.25);margin-top:20px;letter-spacing:0.1em;">
+                左右滑动移动 · 自动射击
+            </p>
+        </div>
+
+        <!-- ================================================
+             游戏画布
+             ================================================ -->
+        <canvas id="game-canvas"></canvas>
+
+        <!-- ================================================
+             游戏结束界面
+             ================================================ -->
+        <div id="gameover-screen" class="screen hidden">
+            <span class="skull-icon">💀</span>
+            <h1>YOU DIED</h1>
+
+            <div class="gameover-stats">
+                <div class="gameover-stat">
+                    <span class="gs-icon">🏅</span>
+                    <span class="gs-label">坚持到了第</span>
+                    <span class="gs-value" id="final-level">1</span>
+                </div>
+                <div class="gameover-stat">
+                    <span class="gs-icon">💀</span>
+                    <span class="gs-label">击杀丧尸</span>
+                    <span class="gs-value" id="final-kills">0</span>
+                </div>
+            </div>
+
+            <button id="restart-btn" class="btn">重新开始</button>
+        </div>
+
+        <!-- ================================================
+             通关界面
+             ================================================ -->
+        <div id="levelup-screen" class="screen hidden">
+            <div class="screen-header">
+                <span class="badge-icon">🏆</span>
+                <h1>通关！</h1>
+                <p class="subtitle">LEVEL CLEAR</p>
+            </div>
+
+            <div class="levelup-stats">
+                <div class="stat-row">
+                    <span class="stat-label">🚀 进入第</span>
+                    <span class="stat-value" id="next-level">2</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">⚡ 武器等级提升</span>
+                    <span class="stat-value">+1 LV</span>
+                </div>
+            </div>
+
+            <div class="weapon-upgrade-notice">
+                <span>✨ 道具加成已保留至下一关</span>
+            </div>
+
+            <button id="continue-btn" class="btn btn-green">继续挑战</button>
+        </div>
+
+    </div><!-- /#game-container -->
+
+    <!-- 游戏脚本（顺序不可变）-->
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/weapons.js"></script>
+    <script src="js/zombies.js"></script>
+    <script src="js/items.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/bullets.js"></script>
+    <script src="js/waves.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

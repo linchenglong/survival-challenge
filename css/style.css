@@ -1,0 +1,554 @@
+/* ================================================================
+   生存挑战 - 全面美化版样式
+   ================================================================ */
+
+/* 导入字体 */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Orbitron:wght@400;700;900&display=swap');
+
+/* 重置样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 禁止文本选择和触摸反馈 */
+body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* 禁止滚动 */
+html, body {
+    overflow: hidden;
+    touch-action: none;
+}
+
+body {
+    font-family: 'Rajdhani', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background-color: #05060f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(120, 0, 0, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(0, 30, 80, 0.2) 0%, transparent 50%);
+}
+
+/* ================================================================
+   游戏容器
+   ================================================================ */
+#game-container {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    height: 100vh;
+    max-height: 900px;
+    background-color: #0d0d1a;
+    overflow: hidden;
+}
+
+@media (min-height: 800px) {
+    #game-container {
+        border-radius: 24px;
+        margin: 10px 0;
+        box-shadow:
+            0 0 0 1px rgba(255, 50, 50, 0.15),
+            0 0 60px rgba(180, 0, 0, 0.3),
+            0 20px 80px rgba(0, 0, 0, 0.8),
+            inset 0 0 60px rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* ================================================================
+   游戏画布
+   ================================================================ */
+#game-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* ================================================================
+   屏幕/界面公共
+   ================================================================ */
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    padding: 30px 24px;
+    /* 默认背景 */
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(180, 0, 0, 0.25) 0%, transparent 60%),
+        linear-gradient(180deg, #05060f 0%, #0d0d1a 50%, #060611 100%);
+}
+
+.screen.hidden {
+    display: none;
+}
+
+/* 屏幕装饰性扫描线覆盖 */
+.screen::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(255, 255, 255, 0.012) 3px,
+        rgba(255, 255, 255, 0.012) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 屏幕粒子背景 */
+.screen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.15) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 15%, rgba(255,255,255,0.1) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 60%, rgba(255,255,255,0.08) 0%, transparent 100%),
+        radial-gradient(1px 1px at 10% 75%, rgba(255,255,255,0.12) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 80%, rgba(255,255,255,0.1) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.screen > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* ================================================================
+   开始界面
+   ================================================================ */
+#start-screen {
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(200, 0, 0, 0.3) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 100%, rgba(0, 0, 80, 0.3) 0%, transparent 55%),
+        linear-gradient(180deg, #05060f 0%, #0d0d1a 100%);
+}
+
+/* Logo 区域 */
+.logo-wrap {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.logo-icon {
+    font-size: 4.5rem;
+    display: block;
+    margin-bottom: 6px;
+    filter: drop-shadow(0 0 24px rgba(220, 50, 50, 0.8))
+            drop-shadow(0 0 8px rgba(255, 100, 0, 0.6));
+    animation: floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+    0%, 100% { transform: translateY(0px) rotate(-3deg); }
+    50% { transform: translateY(-10px) rotate(3deg); }
+}
+
+#start-screen h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 0.08em;
+    line-height: 1.1;
+    text-shadow:
+        0 0 10px rgba(233, 69, 96, 0.9),
+        0 0 30px rgba(233, 69, 96, 0.5),
+        0 0 60px rgba(233, 69, 96, 0.2);
+    animation: titleGlow 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    from {
+        text-shadow:
+            0 0 8px rgba(233, 69, 96, 0.8),
+            0 0 20px rgba(233, 69, 96, 0.4);
+    }
+    to {
+        text-shadow:
+            0 0 16px rgba(233, 69, 96, 1),
+            0 0 40px rgba(233, 69, 96, 0.7),
+            0 0 80px rgba(233, 69, 96, 0.3),
+            0 0 120px rgba(233, 69, 96, 0.1);
+    }
+}
+
+#start-screen .subtitle {
+    font-size: 0.95rem;
+    color: rgba(180, 180, 200, 0.7);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 6px;
+    margin-bottom: 40px;
+}
+
+/* 说明卡片 */
+.info-cards {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 36px;
+    width: 100%;
+    max-width: 320px;
+}
+
+.info-card {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 12px 8px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.info-card .card-icon {
+    font-size: 1.4rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.info-card .card-title {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.info-card .card-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.85rem;
+    color: #ffd700;
+    font-weight: 700;
+}
+
+/* 分隔线 */
+.divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #e94560, transparent);
+    margin: 0 auto 28px;
+    border-radius: 2px;
+}
+
+/* ================================================================
+   通关界面
+   ================================================================ */
+#levelup-screen {
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(0, 180, 100, 0.25) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 100%, rgba(0, 50, 150, 0.25) 0%, transparent 55%),
+        linear-gradient(180deg, #050f07 0%, #0a1210 100%);
+}
+
+#levelup-screen .screen-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+#levelup-screen .badge-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 8px;
+    animation: badgePop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    filter: drop-shadow(0 0 20px rgba(78, 222, 128, 0.7));
+}
+
+@keyframes badgePop {
+    from { transform: scale(0) rotate(-20deg); opacity: 0; }
+    to { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+#levelup-screen h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #4ade80;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 20px rgba(78, 222, 128, 0.6);
+}
+
+#levelup-screen .subtitle {
+    font-size: 0.85rem;
+    color: rgba(180, 220, 190, 0.6);
+    letter-spacing: 0.12em;
+    margin-top: 4px;
+}
+
+/* 通关数据展示 */
+.levelup-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 280px;
+    margin-bottom: 28px;
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(78, 222, 128, 0.15);
+    border-radius: 10px;
+    padding: 10px 16px;
+}
+
+.stat-row .stat-label {
+    font-size: 0.8rem;
+    color: rgba(180, 220, 190, 0.6);
+    letter-spacing: 0.08em;
+}
+
+.stat-row .stat-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffd700;
+}
+
+/* 武器升级提示 */
+.weapon-upgrade-notice {
+    background: linear-gradient(135deg, rgba(78, 222, 128, 0.1), rgba(0, 200, 100, 0.05));
+    border: 1px solid rgba(78, 222, 128, 0.3);
+    border-radius: 12px;
+    padding: 10px 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 280px;
+}
+
+.weapon-upgrade-notice span {
+    font-size: 0.85rem;
+    color: #4ade80;
+    letter-spacing: 0.05em;
+}
+
+/* ================================================================
+   游戏结束界面
+   ================================================================ */
+#gameover-screen {
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(220, 0, 0, 0.35) 0%, transparent 55%),
+        linear-gradient(180deg, #0f0303 0%, #0d0d1a 100%);
+}
+
+#gameover-screen .skull-icon {
+    font-size: 4.5rem;
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+    animation: skullShake 0.4s ease-in-out 0.2s both;
+    filter: drop-shadow(0 0 24px rgba(220, 50, 50, 0.9));
+}
+
+@keyframes skullShake {
+    0%, 100% { transform: rotate(0deg); }
+    20% { transform: rotate(-8deg) scale(1.1); }
+    40% { transform: rotate(8deg) scale(1.15); }
+    60% { transform: rotate(-5deg); }
+    80% { transform: rotate(5deg); }
+}
+
+#gameover-screen h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #e94560;
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-shadow: 0 0 20px rgba(233, 69, 96, 0.7);
+    margin-bottom: 28px;
+}
+
+.gameover-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 280px;
+    margin-bottom: 30px;
+}
+
+.gameover-stat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(233, 69, 96, 0.06);
+    border: 1px solid rgba(233, 69, 96, 0.2);
+    border-radius: 10px;
+    padding: 12px 16px;
+}
+
+.gameover-stat .gs-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.gameover-stat .gs-label {
+    font-size: 0.8rem;
+    color: rgba(200, 150, 160, 0.7);
+    letter-spacing: 0.08em;
+    flex: 1;
+}
+
+.gameover-stat .gs-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffd700;
+}
+
+/* ================================================================
+   按钮样式
+   ================================================================ */
+.btn {
+    position: relative;
+    padding: 14px 52px;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: linear-gradient(135deg, #e94560 0%, #b8003a 100%);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow:
+        0 4px 20px rgba(233, 69, 96, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+        0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    overflow: hidden;
+}
+
+/* 按钮高光扫光动画 */
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    animation: btnSweep 3s ease-in-out infinite;
+}
+
+@keyframes btnSweep {
+    0% { left: -100%; }
+    40%, 100% { left: 100%; }
+}
+
+.btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow:
+        0 8px 28px rgba(233, 69, 96, 0.7),
+        0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+}
+
+.btn:active {
+    transform: translateY(0px) scale(0.98);
+    box-shadow: 0 2px 10px rgba(233, 69, 96, 0.5);
+}
+
+/* 绿色按钮（通关/继续） */
+.btn-green {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    box-shadow:
+        0 4px 20px rgba(34, 197, 94, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+        0 1px 0 rgba(255, 255, 255, 0.2) inset;
+}
+
+.btn-green:hover {
+    box-shadow:
+        0 8px 28px rgba(34, 197, 94, 0.7),
+        0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+}
+
+/* ================================================================
+   动画
+   ================================================================ */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.screen:not(.hidden) .logo-wrap,
+.screen:not(.hidden) h1,
+.screen:not(.hidden) .levelup-stats,
+.screen:not(.hidden) .gameover-stats,
+.screen:not(.hidden) .info-cards,
+.screen:not(.hidden) .btn {
+    animation: fadeInUp 0.4s ease both;
+}
+
+.screen:not(.hidden) h1 { animation-delay: 0.05s; }
+.screen:not(.hidden) .levelup-stats,
+.screen:not(.hidden) .gameover-stats,
+.screen:not(.hidden) .info-cards { animation-delay: 0.15s; }
+.screen:not(.hidden) .btn { animation-delay: 0.25s; }
+
+/* ================================================================
+   响应式
+   ================================================================ */
+@media (max-width: 380px) {
+    #start-screen h1 { font-size: 1.8rem; }
+    .btn { padding: 12px 40px; font-size: 0.8rem; }
+    .info-cards { gap: 6px; }
+}
+
+@media (max-height: 600px) {
+    .logo-icon { font-size: 3rem; margin-bottom: 4px; }
+    #start-screen h1 { font-size: 1.6rem; }
+    .info-cards { margin-bottom: 20px; }
+}
+
+/* ================================================================
+   HUD 备用（通过 Canvas 绘制，CSS 保留结构用）
+   ================================================================ */
+.hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 50;
+    pointer-events: none;
+}
