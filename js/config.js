@@ -81,7 +81,7 @@ const CONFIG = {
             name: '普通丧尸',
             hp: 20,
             defense: 0,
-            speed: 0.75,
+            speed: 1.5,
             damage: 15,
             color: '#4a7c59',
             size: 30,
@@ -91,7 +91,7 @@ const CONFIG = {
             name: '胖子丧尸',
             hp: 50,
             defense: 2,
-            speed: 0.55,
+            speed: 1.1,
             damage: 30,
             color: '#5c4033',
             size: 45,
@@ -101,7 +101,7 @@ const CONFIG = {
             name: '敏捷丧尸',
             hp: 15,
             defense: 0,
-            speed: 1.1,
+            speed: 2.2,
             damage: 15,
             color: '#8b0000',
             size: 25,
@@ -111,7 +111,7 @@ const CONFIG = {
             name: '装甲丧尸',
             hp: 35,
             defense: 5,
-            speed: 0.62,
+            speed: 1.24,
             damage: 20,
             color: '#2f4f4f',
             size: 35,
@@ -121,7 +121,7 @@ const CONFIG = {
             name: '狂暴丧尸',
             hp: 40,
             defense: 2,
-            speed: 1.0,
+            speed: 2.0,
             damage: 30,
             color: '#8b008b',
             size: 38,
@@ -157,7 +157,7 @@ const CONFIG = {
         SPAWN_INTERVAL: 2000,     // 备用（新逻辑不再用此字段）
         PICKUP_DELAY: 1500,       // 道具被拾取后，等待多少毫秒再生成下一对
         INITIAL_DELAY: 3000,      // 开局多少毫秒后才开始生成道具
-        FALL_SPEED: 2.0,          // 道具下落速度
+        FALL_SPEED: 4.0,          // 道具下落速度
         SIZE: 30,
         TYPES: {
             attack_up: {
