@@ -45,10 +45,10 @@ const CONFIG = {
         },
         shotgun: {
             name: '霰弹枪',
-            attack: 50,         // 每发子弹的伤害
+            attack: 30,         // 削弱单发伤害
             bulletCount: 5,     // 扇形发射的子弹数量
-            spreadAngle: 30,    // 扇形角度（度）
-            fireRate: 0.8,
+            spreadAngle: 45,    // 增大散布角度，更难全中
+            fireRate: 0.6,      // 降低射速
             type: 'spread',     // 扇形射击
             color: '#ff8c00',
         },
@@ -70,8 +70,8 @@ const CONFIG = {
 
     // 武器升级配置
     WEAPON_UPGRADE: {
-        ATTACK_BONUS_RATE: 0.05,     // 每级攻击力提升5%
-        FIRE_RATE_BONUS_RATE: 0.02,  // 每级攻速提升2%
+        ATTACK_BONUS_RATE: 0.03,     // 每级攻击力提升3% (削弱)
+        FIRE_RATE_BONUS_RATE: 0.015, // 每级攻速提升1.5%
         MAX_LEVEL: 100,
     },
 
@@ -79,7 +79,7 @@ const CONFIG = {
     ZOMBIES: {
         normal: {
             name: '普通丧尸',
-            hp: 20,
+            hp: 30,
             defense: 0,
             speed: 1.5,
             damage: 15,
@@ -89,7 +89,7 @@ const CONFIG = {
         },
         fat: {
             name: '胖子丧尸',
-            hp: 50,
+            hp: 80,
             defense: 2,
             speed: 1.1,
             damage: 30,
@@ -99,7 +99,7 @@ const CONFIG = {
         },
         agile: {
             name: '敏捷丧尸',
-            hp: 15,
+            hp: 25,
             defense: 0,
             speed: 2.2,
             damage: 15,
@@ -109,7 +109,7 @@ const CONFIG = {
         },
         armored: {
             name: '装甲丧尸',
-            hp: 35,
+            hp: 60,
             defense: 5,
             speed: 1.24,
             damage: 20,
@@ -119,7 +119,7 @@ const CONFIG = {
         },
         berserk: {
             name: '狂暴丧尸',
-            hp: 40,
+            hp: 70,
             defense: 2,
             speed: 2.0,
             damage: 30,
@@ -131,10 +131,10 @@ const CONFIG = {
 
     // 丧尸等级成长配置
     ZOMBIE_UPGRADE: {
-        HP_BONUS_RATE: 0.2,       // 每级生命值提升20%
-        DEFENSE_BONUS: 1,         // 每级抗性提升1
+        HP_BONUS_RATE: 0.35,      // 每级生命值提升35% (增强)
+        DEFENSE_BONUS: 2,         // 每级抗性提升2 (增强)
         SPEED_BONUS_RATE: 0.1,    // 每级速度提升10%
-        DAMAGE_BONUS_RATE: 0.1,   // 每级破坏力提升10%
+        DAMAGE_BONUS_RATE: 0.15,  // 每级破坏力提升15%
     },
 
     // 关卡配置
@@ -162,7 +162,7 @@ const CONFIG = {
         TYPES: {
             attack_up: {
                 name: '攻击力提升',
-                effect: { type: 'attack', value: [5, 15] },
+                effect: { type: 'attack', value: [3, 10] },
                 probability: 0.25,
                 isPositive: true,
                 color: '#ff6b6b',
@@ -170,7 +170,7 @@ const CONFIG = {
             },
             speed_up: {
                 name: '攻速提升',
-                effect: { type: 'fireRate', value: [5, 15] },  // 百分比
+                effect: { type: 'fireRate', value: [3, 10] },  // 百分比
                 probability: 0.25,
                 isPositive: true,
                 color: '#4ade80',

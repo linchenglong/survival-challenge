@@ -15,6 +15,13 @@ class Bullet {
         this.active = true;
         this.weaponType = weaponType;
 
+        // 穿透次数限制
+        switch (weaponType) {
+            case 'sniper':       this.pierceCount = 999; break; // 狙击枪无限穿透
+            case 'desert_eagle': this.pierceCount = 1;   break; // 沙鹰穿透1次（最多打2个）
+            default:             this.pierceCount = 0;   break; // 其他武器不穿透
+        }
+
         // 用于拖尾效果
         this._trail = [];
     }
@@ -248,8 +255,9 @@ const BulletManager = {
 
                     hits.push({ bullet, zombie, damage: actualDamage });
 
-                    if (!zombie.alive) {
+                    if (!zombie.alive && bullet.pierceCount > 0) {
                         bullet.damage -= zombieHpBefore;
+                        bullet.pierceCount--;
                     } else {
                         bullet.damage = 0;
                         bullet.active = false;
